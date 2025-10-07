@@ -1,3 +1,4 @@
+import os
 import psycopg2
 from psycopg2 import Error
 
@@ -8,11 +9,11 @@ def main():
     try:
         # Connect to PostgreSQL database
         connection = psycopg2.connect(
-            host="localhost",
-            database="your_database",
-            user="your_username",
-            password="your_password",
-            port="5432"
+            host=os.environ.get("DB_HOST", "localhost"),
+            database=os.environ.get("DB_NAME", "your_database"),
+            user=os.environ.get("DB_USER", "your_username"),
+            password=os.environ.get("DB_PASSWORD", "your_password"),
+            port=os.environ.get("DB_PORT", "5432")
         )
         
         # Create a cursor object
